@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasks_app/core/presentation/theme/my_theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasks_app/features/get_tasks/presentaion/bloc/cubit/get_tasks_cubit.dart';
 import 'package:tasks_app/features/get_tasks/presentaion/widgets/task_widget.dart';
 
 class TaskListScreen extends StatefulWidget {
@@ -10,17 +11,12 @@ class TaskListScreen extends StatefulWidget {
 }
 
 class _TaskListScreenState extends State<TaskListScreen> {
-  List<Task> tasks = [
-    Task(
-        taskTitle: "first",
-        taskDesc: "hdhsajgsaasjfhjsafhj",
-        taskPriority: "high"),
-    Task(
-        taskTitle: "second",
-        taskDesc:
-            "hdhsajgsaasjfhjsafhjjxnjxjsahxjhsajxsjcxsjcisjcijisisjjcjcjcjcjcjjcjcjcjcjcjcjcjcjcjcjcj,sa",
-        taskPriority: "low"),
-  ];
+  @override
+  void initState() {
+    BlocProvider.of<GetTasksCubit>(context).getTasks();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -33,39 +29,37 @@ class _TaskListScreenState extends State<TaskListScreen> {
         title: const Text("Tasks"),
       ),
       backgroundColor: Color.fromARGB(250, 249, 246, 246),
-      body: Stack(children: [
-        ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return TaskWidget(
-              task: tasks[index],
-            );
-          },
-          itemCount: tasks.length,
-          padding: EdgeInsets.all(screenWidth / 20),
-        ),
-        Align(
-          alignment: FractionalOffset.bottomRight,
-          child: Container(
-            margin: EdgeInsets.only(right: 10, bottom: 20),
-            child: FloatingActionButton(
-              onPressed: () {},
-              child: const Icon(Icons.add),
-              backgroundColor: colorTheme.primary,
-            ),
-          ),
-        )
-      ]),
+      body: BlocBuilder<GetTasksCubit, GetTasksState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () {
+              return const Center(child: CircularProgressIndicator());
+            },
+            success: (tasks) {
+              return ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return TaskWidget(
+                    task: tasks[index],
+                  );
+                },
+                itemCount: tasks.length,
+                padding: EdgeInsets.all(screenWidth / 20),
+              );
+            },
+            error: (error) {
+              return Text(error);
+            },
+            orElse: () {
+              return Text("done");
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+        backgroundColor: colorTheme.primary,
+      ),
     );
   }
-}
-
-class Task {
-  String? taskTitle;
-  String? taskDesc;
-  String? taskPriority;
-  Task({
-    this.taskTitle,
-    this.taskDesc,
-    this.taskPriority,
-  });
 }

@@ -24,6 +24,7 @@ class TasksApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<AuthCubit>()),
+        
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
