@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tasks_app/core/domain/entities/task_entity.dart';
 import 'package:tasks_app/features/get_tasks/presentaion/screens/task_list_screen.dart';
 
 class TaskWidget extends StatelessWidget {
-  final Task task;
+  final TaskEntity task;
   const TaskWidget({Key? key, required this.task}) : super(key: key);
 
   @override
@@ -31,14 +32,14 @@ class TaskWidget extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.all(5),
                   child: Text(
-                    task.taskTitle.toString(),
+                    task.title.toString(),
                     style: textTheme.headline2,
                   ),
                 ),
                 Container(
                   width: 10,
                   height: 10,
-                  decoration: task.taskPriority == "high"
+                  decoration: task.priority == "high"
                       ? const BoxDecoration(
                           color: Colors.red,
                           shape: BoxShape.circle,
@@ -49,7 +50,7 @@ class TaskWidget extends StatelessWidget {
                         ),
                 ),
                 Text(
-                  task.taskPriority.toString(),
+                  task.priority.toString(),
                   style: const TextStyle(
                     color: Colors.grey,
                   ),
@@ -60,7 +61,7 @@ class TaskWidget extends StatelessWidget {
             ),
           ),
           Text(
-            task.taskDesc.toString(),
+            task.description.toString(),
           ),
           Align(
             alignment: FractionalOffset.bottomRight,

@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'response_model.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
-class ResponseModel<Data> {
+class ResponseModel<Data>  {
   final int status;
   final String message;
   final dynamic errors;
