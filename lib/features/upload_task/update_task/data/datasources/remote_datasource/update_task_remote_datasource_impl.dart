@@ -22,7 +22,7 @@ class UpdateTaskRemoteDatasourceImpl implements UpdateTaskRemoteDataSource {
         description: uploadTaskModel.description,
         priority: uploadTaskModel.priority,
         state: uploadTaskModel.state,
-        period: uploadTaskModel.period,
+        dueDate: uploadTaskModel.dueDate,
         attachementFile: uploadTaskModel.attachementFile,
       );
 }

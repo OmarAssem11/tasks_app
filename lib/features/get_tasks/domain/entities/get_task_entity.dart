@@ -6,7 +6,7 @@ class GetTaskEntity extends Equatable {
   final String description;
   final String priority;
   final int state;
-  final String period;
+  final String dueDate;
   final String attachmentUrl;
 
   const GetTaskEntity({
@@ -15,7 +15,7 @@ class GetTaskEntity extends Equatable {
     required this.description,
     required this.priority,
     required this.state,
-    required this.period,
+    required this.dueDate,
     required this.attachmentUrl,
   });
 

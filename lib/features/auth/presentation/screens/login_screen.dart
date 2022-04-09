@@ -21,6 +21,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late TextTheme textTheme;
   late AppLocalizations appLocalizations;
+  final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController(text: 'omar@gmail.com');
+  final passwordController = TextEditingController(text: '123456');
 
   @override
   void didChangeDependencies() {
@@ -29,9 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
     appLocalizations = AppLocalizations.of(context)!;
   }
 
-  final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController(text: 'omar@gmail.com');
-  final passwordController = TextEditingController(text: '123456');
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -10,7 +10,7 @@ import 'package:tasks_app/features/delete_task/domain/repositories/delete_task_r
 class DeleteTaskRepositoryImpl implements DeleteTaskRepository {
   final DeleteTaskApiService _deleteTaskService;
   final AuthLocalDataSource _localDataSource;
-  DeleteTaskRepositoryImpl(
+  const DeleteTaskRepositoryImpl(
     this._deleteTaskService,
     this._localDataSource,
   );

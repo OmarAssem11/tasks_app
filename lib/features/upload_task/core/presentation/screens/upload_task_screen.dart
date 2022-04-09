@@ -27,18 +27,27 @@ class _UploadTaskScreenState extends State<UploadTaskScreen> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   late AppLocalizations appLocalizations;
+  late List<String> priorities;
+  String? selectedPriority;
+  File? attachmentFile;
+  Color iconColor = Colors.white;
+  DateTime selectedDate = DateTime.now();
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     task = ModalRoute.of(context)!.settings.arguments as GetTaskEntity?;
+    appLocalizations = AppLocalizations.of(context)!;
     if (task != null) {
       titleController.text = task!.title;
       descriptionController.text = task!.description;
-      selectedPriority = task!.priority;
-      selectedTime = DateTime.parse(task!.period);
+      selectedPriority = task!.priority == appLocalizations.high
+          ? appLocalizations.high
+          : task!.priority == appLocalizations.low
+              ? appLocalizations.low
+              : appLocalizations.medium;
+      selectedDate = DateTime.parse(task!.dueDate);
     }
-    appLocalizations = AppLocalizations.of(context)!;
     priorities = [
       appLocalizations.high,
       appLocalizations.medium,
@@ -46,12 +55,13 @@ class _UploadTaskScreenState extends State<UploadTaskScreen> {
     ];
   }
 
-  late List<String> priorities;
-  String? selectedPriority;
-  File? attachmentFile;
-  Color iconColor = Colors.white;
-  DateTime selectedTime = DateTime.now();
-  DateTime selectedDate = DateTime.now();
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,7 +204,7 @@ class _UploadTaskScreenState extends State<UploadTaskScreen> {
                                 title: titleController.text,
                                 description: descriptionController.text,
                                 priority: selectedPriority!,
-                                period: selectedTime.toString(),
+                                dueDate: selectedDate.toString(),
                                 state: 0,
                                 attachementFile: attachmentFile,
                               );

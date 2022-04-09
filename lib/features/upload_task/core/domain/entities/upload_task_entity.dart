@@ -6,7 +6,7 @@ class UploadTaskEntity extends Equatable {
   final String description;
   final String priority;
   final int state;
-  final String period;
+  final String dueDate;
   final File? attachementFile;
 
   const UploadTaskEntity({
@@ -14,7 +14,7 @@ class UploadTaskEntity extends Equatable {
     required this.description,
     required this.priority,
     required this.state,
-    required this.period,
+    required this.dueDate,
     this.attachementFile,
   });
 
@@ -24,7 +24,7 @@ class UploadTaskEntity extends Equatable {
         description,
         priority,
         state,
-        period,
+        dueDate,
         attachementFile,
       ];
 }

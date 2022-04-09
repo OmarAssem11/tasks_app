@@ -15,7 +15,11 @@ class AttachmentViewerScreen extends StatelessWidget {
               : CachedNetworkImage(
                   imageUrl: url,
                   placeholder: (_, __) => const CircularProgressIndicator(),
-                  errorWidget: (_, __, error) => const Icon(Icons.error),
+                  errorWidget: (_, __, error) => const Icon(
+                    Icons.error,
+                    size: 50,
+                    color: Colors.red,
+                  ),
                 ),
         ),
       ),

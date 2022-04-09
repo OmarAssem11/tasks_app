@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:tasks_app/features/delete_task/presentation/bloc/delete_task_cubit.dart';
 import 'package:tasks_app/features/get_tasks/domain/entities/get_task_entity.dart';
 import 'package:tasks_app/features/get_tasks/presentation/screens/attachment_viewer_screen.dart';
@@ -13,14 +15,15 @@ class TaskDetailsBottomSheet extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
+    final appLocalizations = AppLocalizations.of(context)!;
+    final dateFormat = DateFormat('d MMMM', appLocalizations.localeName);
+    final formattedTaskDate = dateFormat.format(DateTime.parse(task.dueDate));
     return Container(
       height: MediaQuery.of(context).size.height * .4,
-      padding: const EdgeInsets.only(
-        top: 16,
-        left: 32,
-      ),
+      padding: const EdgeInsets.only(top: 16),
       child: Row(
         children: [
+          const SizedBox(width: 32),
           Expanded(
             flex: 7,
             child: Column(
@@ -39,7 +42,6 @@ class TaskDetailsBottomSheet extends StatelessWidget {
                         Container(
                           width: 10,
                           height: 10,
-                          margin: const EdgeInsets.only(right: 12),
                           decoration: BoxDecoration(
                             color: task.priority == 'High'
                                 ? colorScheme.onPrimary
@@ -49,8 +51,13 @@ class TaskDetailsBottomSheet extends StatelessWidget {
                             shape: BoxShape.circle,
                           ),
                         ),
+                        const SizedBox(width: 12),
                         Text(
-                          task.priority,
+                          task.priority == appLocalizations.high
+                              ? appLocalizations.high
+                              : task.priority == appLocalizations.low
+                                  ? appLocalizations.low
+                                  : appLocalizations.medium,
                           style: textTheme.headline5,
                         ),
                       ],
@@ -68,7 +75,7 @@ class TaskDetailsBottomSheet extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  task.period.substring(0, 11),
+                  formattedTaskDate,
                   style: textTheme.headline5,
                 ),
               ],

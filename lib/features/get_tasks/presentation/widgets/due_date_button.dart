@@ -14,7 +14,8 @@ class DueDateButton extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
-    final dateFormat = DateFormat('d MMMM');
+    final appLocalizations = AppLocalizations.of(context)!;
+    final dateFormat = DateFormat('d MMMM', appLocalizations.localeName);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
@@ -56,7 +57,7 @@ class DueDateButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.dueDate,
+                  appLocalizations.dueDate,
                   style: textTheme.headline4,
                 ),
                 const SizedBox(height: 3),

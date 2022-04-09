@@ -20,7 +20,7 @@ abstract class CreateTaskApiService {
     @Part() required String description,
     @Part() required String priority,
     @Part() required int state,
-    @Part() required String period,
-    @Part(name: 'attachement') File? attachementFile,
+    @Part(name: dueDateKey) required String dueDate,
+    @Part(name: attachmentKey) File? attachementFile,
   });
 }

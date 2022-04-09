@@ -12,7 +12,7 @@ GetTaskModel _$GetTaskModelFromJson(Map<String, dynamic> json) => GetTaskModel(
       description: json['description'] as String,
       priority: json['priority'] as String,
       state: json['state'] as int,
-      period: json['period'] as String,
+      dueDate: json['period'] as String,
       attachmentUrl: json['attachement'] as String,
     );
 
@@ -23,6 +23,6 @@ Map<String, dynamic> _$GetTaskModelToJson(GetTaskModel instance) =>
       'description': instance.description,
       'priority': instance.priority,
       'state': instance.state,
-      'period': instance.period,
       'attachement': instance.attachmentUrl,
+      'period': instance.dueDate,
     };

@@ -9,6 +9,8 @@ const createTaskEndpoint = 'task/create';
 const deleteTaskEndpoint = 'task/delete/{id}';
 const idPath = 'id';
 const getTasksEndpoint = 'task/all';
+const dueDateKey = 'period';
+const attachmentKey = 'attachement';
 const List<Color> iconsColors = [
   Color(0xfffeccd1),
   Color(0xfffee2c6),
