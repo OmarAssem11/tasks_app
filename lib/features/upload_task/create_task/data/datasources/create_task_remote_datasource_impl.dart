@@ -20,7 +20,7 @@ class CreateTaskRemoteDataSourceImpl implements CreateTaskRemoteDataSource {
         description: uploadTaskModel.description,
         priority: uploadTaskModel.priority,
         state: uploadTaskModel.state,
-        period: uploadTaskModel.period,
+        dueDate: uploadTaskModel.dueDate,
         attachementFile: uploadTaskModel.attachementFile,
       );
 }

@@ -49,7 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
     emit(
       result.fold(
-        (error) => const AuthErrorDetails('Network error'),
+        (error) => AuthErrorDetails(error.toString()),
         (_) => const AuthSuccess(),
       ),
     );
@@ -60,7 +60,7 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _logout(NoParams());
     emit(
       result.fold(
-        (error) => const AuthErrorDetails('Network error'),
+        (error) => AuthErrorDetails(error.toString()),
         (_) => const AuthSuccess(),
       ),
     );

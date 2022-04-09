@@ -7,14 +7,14 @@ class UploadTaskModel extends UploadTaskEntity {
     required String description,
     required String priority,
     required int state,
-    required String period,
+    required String dueDate,
     required File? attachmentFile,
   }) : super(
           title: title,
           description: description,
           priority: priority,
           state: state,
-          period: period,
+          dueDate: dueDate,
           attachementFile: attachmentFile,
         );
 }

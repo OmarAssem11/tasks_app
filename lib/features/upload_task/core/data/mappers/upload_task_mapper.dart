@@ -7,7 +7,7 @@ extension Mapper on UploadTaskEntity {
         description: description,
         priority: priority,
         state: state,
-        period: period,
+        dueDate: dueDate,
         attachmentFile: attachementFile,
       );
 }

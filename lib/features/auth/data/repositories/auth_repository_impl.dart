@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:tasks_app/core/data/constants/constants.dart';
 import 'package:tasks_app/core/domain/error/failure.dart';
 import 'package:tasks_app/features/auth/data/mappers/login_mapper.dart';
 import 'package:tasks_app/features/auth/data/mappers/register_mapper.dart';
@@ -51,9 +52,9 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, Unit>> logout() async {
     try {
-      final token = _localDataSource.getToken();
+      final token = _localDataSource.getToken()!;
       await _localDataSource.deleteToken();
-      await _authRemoteDataSource.logout(token: 'Bearer ${token!}');
+      await _authRemoteDataSource.logout(token: '$tokenType $token');
       return right(unit);
     } catch (error) {
       return left(const Failure('Error while logout'));

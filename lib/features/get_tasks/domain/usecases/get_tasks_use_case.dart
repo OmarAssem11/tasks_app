@@ -11,6 +11,6 @@ class GetTasksUseCase implements UseCase<List<GetTaskEntity>, NoParams> {
   const GetTasksUseCase(this._getTasksRepository);
 
   @override
-  Future<Either<Failure, List<GetTaskEntity>>> call(NoParams noParams) async =>
+  Future<Either<Failure, List<GetTaskEntity>>> call(NoParams noParams) =>
       _getTasksRepository.getTasks();
 }

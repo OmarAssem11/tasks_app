@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tasks_app/core/data/constants/constants.dart';
 import 'package:tasks_app/core/presentation/bloc/localization_cubit/localization_cubit.dart';
 import 'package:tasks_app/core/presentation/util/error_toast.dart';
 import 'package:tasks_app/features/auth/presentation/bloc/auth_cubit.dart';
@@ -9,9 +8,9 @@ import 'package:tasks_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:tasks_app/features/auth/presentation/widgets/logout_widget.dart';
 import 'package:tasks_app/features/get_tasks/presentation/bloc/get_tasks_cubit.dart';
 import 'package:tasks_app/features/get_tasks/presentation/bloc/get_tasks_state.dart';
+import 'package:tasks_app/features/get_tasks/presentation/widgets/languages_drop_down_button.dart';
 import 'package:tasks_app/features/get_tasks/presentation/widgets/task_widget.dart';
 import 'package:tasks_app/features/upload_task/core/presentation/screens/upload_task_screen.dart';
-import 'package:tasks_app/features/upload_task/core/presentation/widgets/custom_drop_down_button_form_field.dart';
 
 class TaskListScreen extends StatefulWidget {
   const TaskListScreen();
@@ -41,20 +40,15 @@ class _TaskListScreenState extends State<TaskListScreen> {
       appBar: AppBar(
         title: Text(appLocalizations.myTasks),
         actions: [
-          SizedBox(
-            height: 150,
-            width: 150,
-            child: CustomDropDownButtonFormField(
-              itemsNames: localizationLangs,
-              value: selectedLang,
-              onChanged: (newLang) {
-                if (newLang != null) {
-                  BlocProvider.of<LocalizationCubit>(context)
-                      .changeLanguage(newLang);
-                }
-              },
-              hintText: 'Language',
-            ),
+          LanguagesDropDownButton(
+            onChanged: (newLang) {
+              if (newLang != null) {
+                BlocProvider.of<LocalizationCubit>(context)
+                    .changeLanguage(newLang);
+                selectedLang = newLang;
+              }
+            },
+            value: selectedLang,
           ),
           LogoutWidget(
             onPressed: () {

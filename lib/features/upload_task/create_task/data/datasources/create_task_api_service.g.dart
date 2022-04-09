@@ -22,7 +22,7 @@ class _CreateTaskApiService implements CreateTaskApiService {
       required description,
       required priority,
       required state,
-      required period,
+      required dueDate,
       attachementFile}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -34,7 +34,7 @@ class _CreateTaskApiService implements CreateTaskApiService {
     _data.fields.add(MapEntry('description', description));
     _data.fields.add(MapEntry('priority', priority));
     _data.fields.add(MapEntry('state', state.toString()));
-    _data.fields.add(MapEntry('period', period));
+    _data.fields.add(MapEntry('period', dueDate));
     if (attachementFile != null) {
       _data.files.add(MapEntry(
           'attachement',

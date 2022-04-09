@@ -8,30 +8,28 @@ class LogoutWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final headline2 = textTheme.headline2;
-    final appLocalization = AppLocalizations.of(context)!;
+    final appLocalizations = AppLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.only(
-        right: 12,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: InkWell(
         onTap: () {
           final dialog = AlertDialog(
             title: Text(
-              appLocalization.areYouSureYouWantToLogout,
+              appLocalizations.areYouSureYouWantToLogout,
               style: textTheme.caption,
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text(
-                  appLocalization.no,
+                  appLocalizations.no,
                   style: headline2,
                 ),
               ),
               TextButton(
                 onPressed: onPressed,
                 child: Text(
-                  appLocalization.yes,
+                  appLocalizations.yes,
                   style: headline2,
                 ),
               ),
