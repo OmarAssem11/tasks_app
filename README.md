@@ -1,4 +1,4 @@
-# Tasks app using Clean Architecture(TDD)
+# Tasks app using Clean Architecture
 
 ## Features:
 
